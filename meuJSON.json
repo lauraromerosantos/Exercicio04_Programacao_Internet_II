@@ -1,0 +1,13 @@
+{
+    "nome": "Maria",
+    "idade": 25,
+    "altura": 1.75,
+    "casado": true,
+    "filhos": [
+        { "nome": "Pedro", "idade": 2 },
+        { "nome": "Laura", "idade": 5 }
+    ],
+    "conjuge": { "nome": "João", "idade": 25 },
+    "profissao": ["Engenheira", "Professora"],
+    "endereco": null
+}
