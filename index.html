@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula JSON</title>
+</head>
+
+<body>
+    <div id="estatico"></div>
+    <button onclick="lerEstatico()">Ler JSON</button>
+
+
+
+    <script>
+        function lerEstatico() {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var objJS = JSON.parse(this.responseText);
+                    var conteudo = "Nome: " + objJS.nome + "<br>Idade: " + objJS.idade;
+                    conteudo += " <hr> " + JSON.stringify(objJS);
+                    document.getElementById("estatico").innerHTML = conteudo;
+                }
+            };
+            http.open("GET", "meuJSON.json", true);
+            http.send();
+        }
+    </script>
+
+    <hr>
+
+    <div id="dinamico"></div>
+    <button onclick="lerDinamico()">Ler JSON do Servidor PHP</button>
+
+    <script>
+        function lerDinamico() {
+            var http = new XMLHttpRequest();
+            http.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var objJS = JSON.parse(this.responseText);
+                    var produtos = objJS.produtos;
+
+                    var conteudo = "<table border='1' >";
+                    conteudo += " <tr> <th>Id:</th> <th> Nome: </th> </tr>";
+                    produtos.forEach(prod => {
+                        conteudo += "<tr> <td>" + prod.id + "</td> ";
+                        conteudo += "     <td>" + prod.nome + "</td> </tr>";
+                    });
+                    conteudo += "</table>";
+                    document.getElementById("dinamico").innerHTML = conteudo;
+                }
+            };
+            http.open("GET", "servidor.php", true);
+            http.send();
+        }
+    </script>
+
+</body>
+
+</html>
